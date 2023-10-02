@@ -37,7 +37,8 @@ export class LoginComponent implements OnInit {
           this.toastr.success('Bạn đã đăng nhập thành công', 'Thành công');
       },
       (error) => {
-        console.log(error)
+        console.log(error);
+        this.toastr.warning('Đăng nhập không thành công', 'Thất bại');
       }
     )
  

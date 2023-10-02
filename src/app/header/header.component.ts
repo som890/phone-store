@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { UserAuthService } from '../_service/user-auth.service';
 import { Router } from '@angular/router';
 import { UserService } from '../_service/user.service';
@@ -16,6 +16,15 @@ export class HeaderComponent implements OnInit {
               private router: Router, 
               public userService: UserService,
               private dialog: MatDialog) {}
+
+  productDetails: Product[] = [];
+  //showCart = false;
+  displayedColumns: string[] = ['Image','Name'];
+  opened = false;
+  @ViewChild('cartContainer')
+  cartContainer!: ElementRef;
+  isInsideCart = false;
+
 
   ngOnInit(): void { }
 
@@ -43,6 +52,12 @@ export class HeaderComponent implements OnInit {
     this.userAuthService.clear();
     this.router.navigate(['/']);
   }
+  
+  @HostListener('mouseenter', ['$event'])
+  onCartEnter(event: MouseEvent) {
+    this.isInsideCart = true;
+    this.showCart();
+  }
 
   public isAdmin() {
     return this.userAuthService.isAdmin();
@@ -51,14 +66,30 @@ export class HeaderComponent implements OnInit {
     this.userAuthService.isUser();
   }
   
+  @HostListener('mouseleave', ['$event'])
+  onCartLeave(event: MouseEvent) {
+    if (!this.isInsideCart) {
+      this.hideCart();
+    }
+  }
+
   @HostListener('mouseenter', ['$event'])
-  onCartMouseEnter(event: any) {
-    event.target.classList.add('is-active');
+  onContainerEnter(event: MouseEvent) {
+    this.isInsideCart = true;
   }
 
   @HostListener('mouseleave', ['$event'])
-  onCartMouseLeave(event: any) {
-    event.target.classList.remove('is-active');
+  onContainerLeave(event: MouseEvent) {
+    this.isInsideCart = false;
+    this.hideCart();
+  }
+
+  private showCart() {
+    this.cartContainer.nativeElement.style.display = 'block';
+  }
+
+  private hideCart() {
+    this.cartContainer.nativeElement.style.display = 'none';
   }
 
 }

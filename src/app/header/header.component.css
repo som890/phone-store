@@ -1,52 +1,45 @@
 .space-buttons {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
-.cart {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    display: none;
-  }
-  
-  .cart.is-active {
-    display: block;
-  }
-  
-  .cart-container {
-    background-color: black;
-    border-radius: 5px;
-    padding: 10px;
-  }
-  
-  .product-list {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .product {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .product-image {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-  }
-  
-  .product-name {
-    font-size: 16px;
-  }
-  
-  .product-price {
-    font-size: 14px;
-    color: #999999;
-  }
-  
-  .total {
-    text-align: right;
-  }
-  
+mat-sidenav-container {
+  height: calc(205vh - 115vh);
+}
+
+mat-sidenav {
+  width: 280px;
+  background-color: #fafafa;
+}
+
+.list-item-content mat-icon {
+  margin-right: 20px;
+  /* Điều chỉnh khoảng cách giữa biểu tượng và chữ */
+}
+
+.cart-wrapper {
+  cursor: pointer;
+  position: relative;
+  /* Điều chỉnh vị trí của phần tử kích hoạt (trigger) và giao diện giỏ hàng */
+}
+
+.cart-trigger:hover+.cart-container {
+  display: block;
+  /* Hiển thị giao diện giỏ hàng khi hover qua phần tử kích hoạt */
+}
+
+.cart-container {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fafafa;
+  border: 1px solid #333;
+  padding: 10px;
+  width: 300px;
+  min-height: 200px;
+  /* Điều chỉnh kích thước giỏ hàng */
+  z-index: 999;
+  /* Đảm bảo giao diện giỏ hàng hiển thị trên các phần tử khác */
+  /* Thêm các thuộc tính CSS khác cho kiểu dáng của giao diện giỏ hàng */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}

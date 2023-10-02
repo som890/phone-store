@@ -9,6 +9,7 @@ import { Product } from '../_model/product.model';
 import { Router } from '@angular/router';
 import { ConfirmDeleteDialogComponent } from '../confirm-delete-dialog/confirm-delete-dialog.component';
 import { AddNewProductComponent } from '../add-new-product/add-new-product.component';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -25,9 +26,11 @@ export class ShowProductDetailsComponent implements OnInit {
   showMoreProductButton = false;
   hasLoadedProducts: boolean = false;
 
-  constructor(private productService:ProductService, public imagesDialog: MatDialog, 
+  constructor(private productService:ProductService, 
+              public imagesDialog: MatDialog, 
               private imageProcessingService:ImageProccesingService,
-              private router: Router, private dialog: MatDialog ){ }
+              private router: Router, private dialog: MatDialog ,
+              private toastr: ToastrService){ }
 
   ngOnInit(): void {
 
@@ -60,6 +63,7 @@ export class ShowProductDetailsComponent implements OnInit {
       }else {
         this.showMoreProductButton = false;
       }
+     
     }, (error:HttpErrorResponse)=>{
       console.log(error);
     }
@@ -78,9 +82,11 @@ export class ShowProductDetailsComponent implements OnInit {
         this.productService.deleteProduct(productId).subscribe(
           (resp) => {
             this.productDetails = this.productDetails.filter(product => product.productId !== productId);
+            this.toastr.success('Bạn đã xóa sản phẩm khỏi danh sách','Thành công')
           },
           (error: HttpErrorResponse) => {
             console.log(error);
+            this.toastr.error('Đã xảy ra lỗi!', 'Thông báo');
           }
         );
       }

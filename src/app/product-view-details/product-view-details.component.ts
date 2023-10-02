@@ -41,7 +41,8 @@ export class ProductViewDetailsComponent implements OnInit{
       (response) => {
         console.log(response);
        // Hiển thị thông báo thành công
-       this.toastr.success('Bạn đã thêm sản phẩm vào giỏ hàng thành công', 'Thành công');
+       this.toastr.success('Bạn đã thêm sản phẩm vào giỏ hàng thành công', 'Thành công', {
+                            positionClass: 'toast-center'});
       }, (error) => {
         console.log(error);
       }

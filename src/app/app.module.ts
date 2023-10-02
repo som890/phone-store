@@ -39,12 +39,13 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { ConfirmDeleteDialogComponent } from './confirm-delete-dialog/confirm-delete-dialog.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ConfirmDeleteCartItemDialogComponent } from './confirm-delete-cart-item-dialog/confirm-delete-cart-item-dialog.component';
-import {UserRoutingModule} from 'src/app/user/user-routing.module';
-import {AdminRoutingModule} from 'src/app/admin/admin-routing.module'
 import {ToastrModule}  from 'ngx-toastr'
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { FooterComponent } from './footer/footer.component';
 import { CardBoxComponent } from './card-box/card-box.component';
+import {MatListModule} from '@angular/material/list';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -88,9 +89,10 @@ import { CardBoxComponent } from './card-box/card-box.component';
     MatDialogModule,
     MatButtonToggleModule,
     MatSnackBarModule,
-    UserRoutingModule,
-    AdminRoutingModule,
     MatPaginatorModule,
+    MatListModule,
+    MatSidenavModule,
+    MatMenuModule,
     ToastrModule.forRoot()
 
   ],

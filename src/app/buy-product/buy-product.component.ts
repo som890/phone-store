@@ -46,13 +46,15 @@ export class BuyProductComponent implements OnInit{
       (resp) => {
         console.log(resp);
         orderForm.reset();
+        this.toastr.success('Bạn đã đặt hàng thành công! Vui lòng chờ 2-3 ngày', 'Đăt thành công');
         this.router.navigate(['/orderConfirm'])
       }, (err) => {
         console.log(err);
+        this.toastr.error('Đã xảy ra lỗi!', 'Thông báo');
       }
     )
      // Hiển thị thông báo thành công
-     this.toastr.success('Bạn đã đặt hàng thành công! Vui lòng chờ 2-3 ngày', 'Đăt thành công');
+   
   }
   getQuantityForProduct(productId: number | undefined) {
     const filteredQuantity = this.orderDetails.orderProductQuantityList.filter(

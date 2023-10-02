@@ -19,15 +19,6 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  product: Product = {
-    productId: 0,
-    productName: "",
-    productDescription: "",
-    productDiscountedPrice: 0,
-    productActualPrice: 0,
-    productImages: []
-  }
-
   public isLoggedIn() {
     return this.userAuthService.isLoggedIn();
   }
