@@ -1,0 +1,58 @@
+<div class="mt-5 p-3 container">
+    <table mat-table [dataSource]="myOrderDetails" class="mat-elevation-z8">
+        <!--Image Column-->
+        <ng-container matColumnDef="Image">
+            <th mat-header-cell *matHeaderCellDef> Hình ảnh </th>
+            <td mat-cell *matCellDef="let element">
+                <div
+                    *ngIf="element.product && element.product.productImages && element.product.productImages.length > 0">
+                    <!-- Sử dụng dữ liệu picByte để hiển thị hình ảnh -->
+                    <img [src]="'data:image/jpeg;base64,' + element.product.productImages[0].picByte" width="100px"
+                        height="100px">
+                </div>
+            </td>
+        </ng-container>
+
+        <!-- Product name Column -->
+        <ng-container matColumnDef="Product Name">
+            <th mat-header-cell *matHeaderCellDef>Tên sản phẩm</th>
+            <td mat-cell *matCellDef="let element"> {{element.product.productName}} </td>
+        </ng-container>
+        
+        <!-- Name Column -->
+        <ng-container matColumnDef="Name">
+            <th mat-header-cell *matHeaderCellDef>Tên đầy đủ người mua hàng</th>
+            <td mat-cell *matCellDef="let element">{{element.orderFullName}} </td>
+        </ng-container>
+
+        <!-- Address Column -->
+        <ng-container matColumnDef="Address">
+            <th mat-header-cell *matHeaderCellDef>Địa chỉ đầy đủ người mua hàng</th>
+            <td mat-cell *matCellDef="let element">{{element.orderFullAddress}} </td>
+        </ng-container>
+
+        <!-- Contact number Column -->
+        <ng-container matColumnDef="Contact number">
+            <th mat-header-cell *matHeaderCellDef> Số liên hệ</th>
+            <td mat-cell *matCellDef="let element">{{element.orderContactNumber}} </td>
+        </ng-container>
+
+        <!-- Amount Column -->
+        <ng-container matColumnDef="Amount">
+            <th mat-header-cell *matHeaderCellDef> Số tiền</th>
+            <td mat-cell *matCellDef="let element" style="color: red;">{{formatCurrency(element.orderAmount)}} </td>
+        </ng-container>
+
+        <!-- Status Column -->
+        <ng-container matColumnDef="Status">
+            <th mat-header-cell *matHeaderCellDef> Trạng thái</th>
+            <td mat-cell *matCellDef="let element">{{element.orderStatus}} </td>
+        </ng-container>
+
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+</div>

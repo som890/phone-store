@@ -1,0 +1,89 @@
+<div class="container mt-5">
+    <div class="card p-2">
+
+        <div class="row">
+            <div class="col-6">
+                <form #orderForm="ngForm" (ngSubmit)="placeForm(orderForm)">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Họ và tên</mat-label>
+                        <input matInput placeholder="Họ và tên" [(ngModel)]="orderDetails.fullName" name="fullName">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Địa chị cụ thể</mat-label>
+                        <input matInput placeholder="Địa chị cụ thể" [(ngModel)]="orderDetails.fullAddress"
+                            name="fullAddress">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Số liên hệ</mat-label>
+                        <input matInput placeholder="Số liên hệ" [(ngModel)]="orderDetails.contactNumber"
+                            name="contactNumber">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Số liên hệ khác(nếu có)</mat-label>
+                        <input matInput placeholder="Số liên hệ khác(nếu có)"
+                            [(ngModel)]="orderDetails.alternateContactNumber" name="alternateContactNumber">
+                    </mat-form-field>
+
+                    <div align="end">
+                        <button mat-stroked-button type="submit" color="primary">Đặt hàng
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-6">
+                <table class="table">
+                    <thead class="thead">
+                       
+                            <tr>
+                                <th style="font-family: 'Roboto', sans-serif;">Sản phẩm</th>
+                                <th style="font-family: 'Roboto', sans-serif;">Tên sản phẩm</th>
+                                <th style="font-family: 'Roboto', sans-serif;">Số tiền</th>
+                                <th style="font-family: 'Roboto', sans-serif;">Số lượng</th>
+                                <th style="font-family: 'Roboto', sans-serif;">Thành tiền</th>
+                            </tr>
+                    </thead>
+                    <tbody class="tbody">
+                        <tr *ngFor="let product of productDetails">
+                            <td>
+                                <div *ngIf="product.productImages && product.productImages.length > 0">
+                                    <img [src]="product.productImages[0].url" width="100px" height="100px">
+                                </div>
+                            </td>
+                            <td>{{product.productName}}</td>
+                            <td>{{formatCurrency(product.productDiscountedPrice)}}</td>
+                            <td>
+                                <select 
+                                 #quantity
+                                 class="form-select"
+                                 [ngModel]="getQuantityForProduct(product.productId)"
+                                 (change)="onQuantityChanged(quantity.value, product.productId)"
+                                >
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </td>
+                            <td style="color: red; font-family: 'Roboto', sans-serif;">{{formatCurrency(getCalculatedTotal(product.productId, product.productDiscountedPrice))}}</td>
+                        </tr>
+
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td style="font-family: 'Roboto', sans-serif;">Total</td>
+                            <td style="color: red;">{{formatCurrency(getCalculatedGrandTotal())}}</td>
+            
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

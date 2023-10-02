@@ -1,0 +1,59 @@
+<!-- <div class="container mt-5">
+    <div class="card" style="padding: 20px;">
+        <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Username</mat-label>
+                <input matInput
+                        ngModel 
+                        name="userName" 
+                        id="userName" 
+                        placeholder="Username">
+
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Password</mat-label>
+                <input type="password" 
+                        matInput
+                        ngModel 
+                        name="userPassword" 
+                        id="userPassword" 
+                        placeholder="Password">
+            </mat-form-field>
+
+            <button class="w-100" type="submit" mat-raised-button color="primary">Login</button>
+        </form>
+
+    </div>
+    <div class="text-center">
+        <br>
+        <button class="w-20" mat-raised-button type="button" (click)="register()">Create an account</button>
+    </div>
+</div> -->
+<div class="container mt-5">
+  <div class="card p-4" style="max-width: 500px; margin: 0 auto;">
+    <h2 class="text-center">Đăng nhập</h2>
+    <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-icon matPrefix>account_circle</mat-icon>
+        <mat-label>Tên người dùng</mat-label>
+        <input matInput ngModel name="userName" id="userName" placeholder="Tên người dùng" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-icon matPrefix>lock</mat-icon>
+        <mat-label>Mật khẩu</mat-label>
+        <input [type]="hidePassword ? 'password' : 'text'" matInput ngModel name="userPassword" id="userPassword"
+          placeholder="Mật khẩu" required>
+        <mat-icon matSuffix (click)="togglePasswordVisibility()">
+          {{ hidePassword ? 'visibility' : 'visibility_off' }}
+        </mat-icon>
+      </mat-form-field>
+
+      <button class="w-100 mt-3" type="submit" mat-raised-button color="primary">Đăng nhập</button>
+    </form>
+  </div>
+  <div class="text-center mt-3">
+    <button mat-raised-button color="accent" (click)="register()">Tạo tài khoản mới</button>
+  </div>
+</div>

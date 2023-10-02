@@ -1,0 +1,48 @@
+<mat-toolbar color="primary">
+  <span>
+    PhoneStore
+  </span>
+
+  <span class="space-buttons"></span>
+  <button *ngIf="! isLoggedIn()" routerLink="/login" mat-raised-button color="primary">
+      Đăng nhập
+    </button>
+
+  <button *ngIf="isLoggedIn()" (click)="logout()" mat-raised-button color="accent">
+    Đăng xuất
+  </button>
+</mat-toolbar>
+
+<mat-toolbar color="primary" *ngIf="isLoggedIn()">
+  <button mat-raised-button color="primary" routerLink="/">Home</button>
+
+  <!-- Cart-->
+  <button mat-raised-button color="primary" routerLink="/cart" class="cart-button">
+    <mat-icon *ngIf="!isAdmin()" style="cursor: pointer;">shopping_cart</mat-icon>
+    Giỏ hàng
+  </button>
+  
+  <div class="cart">
+    <div class="product-list">
+      <div>
+        <div class="product">
+          
+        </div>
+      </div>
+    </div>
+    <div class="total">
+      <p>Tổng giá:</p>
+      <button class="btn-view">Xem giỏ hàng</button>
+      <button class="btn-checkout">Thanh toán</button>
+    </div>
+  </div>
+  
+  
+  
+  <button *ngIf="!isAdmin()" mat-raised-button color="primary" routerLink="/myOrders">Đơn hàng của tôi</button>
+  <button *ngIf="isAdmin()" mat-raised-button color="primary" (click)="openNewProductDialog()">Thêm sản phẩm mới</button>
+  <button *ngIf="isAdmin()" mat-raised-button color="primary" routerLink="/showProductDetails">Chi tiết sản phẩm</button>
+  <button *ngIf="isAdmin()" mat-raised-button color="primary" routerLink="/ordersInformation">Thông tin đơn hàng</button>
+</mat-toolbar>
+
+

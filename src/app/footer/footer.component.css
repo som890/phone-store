@@ -1,0 +1,30 @@
+/* CSS cho phần footer */
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    max-width: 100%; /* Giới hạn chiều rộng tối đa của footer */
+    background-color: #333; /* Màu nền footer */
+    color: #fff; /* Màu văn bản trong footer */
+    padding: 30px 0; /* Khoảng cách giữa nội dung và viền dưới của footer */
+  }
+  
+  .footer ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer ul li {
+    margin-bottom: 10px;
+  }
+  
+  .footer a {
+    color: #fff; /* Màu liên kết */
+    text-decoration: none;
+  }
+  
+  /* CSS cho liên kết khi hover */
+  .footer a:hover {
+    text-decoration: underline;
+  }
+  

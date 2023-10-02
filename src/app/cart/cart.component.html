@@ -1,0 +1,69 @@
+<div class="p-3 mt-5">
+
+  <div align="right" class="mb-3" *ngIf="cartDeatils && cartDeatils.length > 0">
+    <button mat-raised-button color="primary" (click)="checkOut()">Thanh toán</button>
+  </div>
+  <table mat-table *ngIf="cartDeatils && cartDeatils.length > 0" [dataSource]="cartDeatils" class="mat-elevation-z8">
+
+    <!--Image Column-->
+    <ng-container matColumnDef="Image">
+      <th mat-header-cell *matHeaderCellDef> Hình ảnh </th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="element.product && element.product.productImages && element.product.productImages.length > 0">
+          <!-- Sử dụng dữ liệu picByte để hiển thị hình ảnh -->
+          <img [src]="'data:image/jpeg;base64,' + element.product.productImages[0].picByte" width="100px"
+            height="100px">
+        </div>
+      </td>
+    </ng-container>
+
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="Name">
+      <th mat-header-cell *matHeaderCellDef> Tên sản phẩm </th>
+      <td mat-cell *matCellDef="let element"> {{element.product.productName}} </td>
+    </ng-container>
+
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef> Mô tả </th>
+      <td mat-cell *matCellDef="let element"> {{element.product.productDescription}} </td>
+    </ng-container>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="Price">
+      <th mat-header-cell *matHeaderCellDef> Giá gốc </th>
+      <td mat-cell *matCellDef="let element" style="text-decoration: line-through;">
+        {{formatCurrency(element.product.productActualPrice)}} </td>
+    </ng-container>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="Discounted Price">
+      <th mat-header-cell *matHeaderCellDef> Giá sale </th>
+      <td mat-cell *matCellDef="let element" style="color: red;"> {{formatCurrency(element.product.productDiscountedPrice)}} </td>
+    </ng-container>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="Actions">
+      <th mat-header-cell *matHeaderCellDef> Thao tác </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-flat-button color="warn" (click)="delete(element.cartId)">Xóa</button>
+      </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <!-- Thông báo giỏ hàng trống -->
+  <div *ngIf="!cartDeatils || cartDeatils.length === 0" style="text-align: center;">
+    <!-- Hình ảnh cái giỏ -->
+    <img src="assets/images/add-to-cart.png" alt="Cái giỏ" width="100px" height="100px">
+    <p>Giỏ hàng của bạn hiện đang trống.</p>
+    <!-- Bạn có thể thêm nút hoặc liên kết để quay lại trang sản phẩm hoặc thực hiện các hành động khác tùy ý -->
+    <button mat-raised-button color="primary">Mua ngay</button>
+  </div>
+
+</div>

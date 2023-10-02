@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="product-list">
+        <!--Image Column-->
+    <ng-container matColumnDef="Image">
+        <th mat-header-cell *matHeaderCellDef> Hình ảnh </th>
+        <td mat-cell *matCellDef="let element">
+          <div *ngIf="element.product && element.product.productImages && element.product.productImages.length > 0">
+            <!-- Sử dụng dữ liệu picByte để hiển thị hình ảnh -->
+            <img [src]="'data:image/jpeg;base64,' + element.product.productImages[0].picByte" width="50px"
+              height="50px">
+          </div>
+        </td>
+      </ng-container>
+    </div>
+    <div class="total">
+      <p>Tổng giá: 23.000.000</p>
+      <button class="btn-view">Xem giỏ hàng</button>
+      <button class="btn-checkout">Thanh toán</button>
+    </div>
+  </div>
+  

@@ -1,0 +1,70 @@
+<div class="container mt-5">
+    <mat-button-toggle-group aria-label="Favorite Color">
+        <mat-button-toggle value="All" (click)=" getAllOrderDetailsForAdmin('All')">Tất cả</mat-button-toggle>
+        <mat-button-toggle value="Placed" (click)="getAllOrderDetailsForAdmin('Placed')">Đã đặt hàng</mat-button-toggle>
+        <mat-button-toggle value="Delivered" (click)="getAllOrderDetailsForAdmin('Delivered')">Đã giao hàng</mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <!-- Id Column -->
+        <ng-container matColumnDef="Id">
+            <th mat-header-cell *matHeaderCellDef> Mã đơn </th>
+            <td mat-cell *matCellDef="let element"> {{element.orderId}} </td>
+        </ng-container>
+
+          <!--Image Column-->
+          <ng-container matColumnDef="Image">
+            <th mat-header-cell *matHeaderCellDef> Hình ảnh </th>
+            <td mat-cell *matCellDef="let element">
+                <div
+                    *ngIf="element.product && element.product.productImages && element.product.productImages.length > 0">
+                    <!-- Sử dụng dữ liệu picByte để hiển thị hình ảnh -->
+                    <img [src]="'data:image/jpeg;base64,' + element.product.productImages[0].picByte" width="100px"
+                        height="100px">
+                </div>
+            </td>
+        </ng-container>
+
+        <!-- Product name Column -->
+        <ng-container matColumnDef="Product Name">
+            <th mat-header-cell *matHeaderCellDef>Tên sản phẩm</th>
+            <td mat-cell *matCellDef="let element"> {{element.product.productName}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="Name">
+            <th mat-header-cell *matHeaderCellDef>Tên khách hàng </th>
+            <td mat-cell *matCellDef="let element"> {{element.user.userName}} </td>
+        </ng-container>
+
+        <!-- Address Column -->
+        <ng-container matColumnDef="Address">
+            <th mat-header-cell *matHeaderCellDef>Địa chỉ khách hàng</th>
+            <td mat-cell *matCellDef="let element"> {{element.orderFullAddress}} </td>
+        </ng-container>
+
+        <!-- Contact numberColumn -->
+        <ng-container matColumnDef="Contact number">
+            <th mat-header-cell *matHeaderCellDef>Số liên hệ</th>
+            <td mat-cell *matCellDef="let element"> {{element.orderContactNumber}} </td>
+        </ng-container>
+
+        <!-- Status numberColumn -->
+        <ng-container matColumnDef="Status">
+            <th mat-header-cell *matHeaderCellDef>Trạng thái</th>
+            <td mat-cell *matCellDef="let element"> {{element.orderStatus}} </td>
+        </ng-container>
+
+        <!-- Action numberColumn -->
+        <ng-container matColumnDef="Action">
+            <th mat-header-cell *matHeaderCellDef>Chức năng</th>
+            <td mat-cell *matCellDef="let element">
+                <button *ngIf="element.orderStatus == 'Placed'" mat-raised-button color="primary"
+                    (click)="markOrderAsDelivered(element.orderId)">Đánh dấu đã vận chuyển</button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
